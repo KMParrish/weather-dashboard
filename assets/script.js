@@ -99,6 +99,8 @@ function calculateAverages(days) {
     return days
 }
 function fetchAndRender(url, city) {
+    const cityName = document.getElementById("city-name")
+    cityName.innerText = `Today's Weather for: ${city} `
     const fiveDayParent = document.getElementById("fiveday-header")
     fiveDayParent.classList.remove("d-none")
     const fiveDayHeader = fiveDayParent.querySelector("h3")
@@ -106,9 +108,24 @@ function fetchAndRender(url, city) {
     fiveDaysApi(url).then((data)=>{
         let firstKey = Object.keys(data)[0]
         const currentDay = data[firstKey]
+        renderToday(currentDay)
         delete data[firstKey]
         renderCards(data)
     })
+}
+function renderToday (data) {
+    console.log(data)
+    const parentDiv = document.getElementById("today-weather")
+    const containerDiv = document.getElementById("card-body")
+    parentDiv.classList.remove("d-none")
+    const weatherSImg = document.getElementById("current-pic")
+    weatherSImg.setAttribute("src", "https://openweathermap.org/img/wn/" + data["weatherMains"] + "@2x.png");
+    const tempS = document.getElementById("temperature")
+    tempS.innerText = `Temp: ${data["temps"]} °F`
+    const windS = document.getElementById("wind-speed")
+    windS.innerText = `Wind: ${data["windSpeeds"]} MPH`
+    const humidityS = document.getElementById("humidity")
+    humidityS.innerText = `Humidity: ${data["humidities"]} %`
 }
 function renderCards(data) {
     const parentDiv = document.getElementById("5-day")
