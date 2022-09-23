@@ -100,7 +100,7 @@ function calculateAverages(days) {
 }
 function fetchAndRender(url, city) {
     const cityName = document.getElementById("city-name")
-    cityName.innerText = `Today's Weather for: ${city} `
+    cityName.innerText = `Today's Weather for ${city} `
     const fiveDayParent = document.getElementById("fiveday-header")
     fiveDayParent.classList.remove("d-none")
     const fiveDayHeader = fiveDayParent.querySelector("h3")
